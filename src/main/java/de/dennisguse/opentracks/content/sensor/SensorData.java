@@ -50,8 +50,14 @@ public abstract class SensorData<T> {
         return value != null;
     }
 
+    @NonNull
+    protected abstract T getNoneValue();
+
     public T getValue() {
-        return value;
+        if (isRecent()) {
+            return value;
+        }
+        return getNoneValue();
     }
 
     /**

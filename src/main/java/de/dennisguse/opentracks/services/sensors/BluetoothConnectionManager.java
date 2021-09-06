@@ -188,6 +188,7 @@ public abstract class BluetoothConnectionManager<DataType> {
 
         @Override
         protected SensorDataCycling.Cadence parsePayload(String sensorName, String address, BluetoothGattCharacteristic characteristic) {
+            Log.e("probando", "parsePayload");
             SensorDataCycling.CadenceAndSpeed cadenceAndSpeed = BluetoothUtils.parseCyclingCrankAndWheel(address, sensorName, characteristic);
             if (cadenceAndSpeed == null) {
                 return null;

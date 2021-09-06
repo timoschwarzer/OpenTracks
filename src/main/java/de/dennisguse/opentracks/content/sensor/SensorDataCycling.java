@@ -59,6 +59,12 @@ public final class SensorDataCycling {
             return crankRevolutionsTime;
         }
 
+        @NonNull
+        @Override
+        protected Float getNoneValue() {
+            return 0f;
+        }
+
         public void compute(Cadence previous) {
             if (hasData() && previous != null && previous.hasData()) {
                 float timeDiff_ms = UintUtils.diff(crankRevolutionsTime, previous.crankRevolutionsTime, UintUtils.UINT16_MAX) / 1024f * UnitConversions.S_TO_MS;
@@ -70,6 +76,9 @@ public final class SensorDataCycling {
                     float cadence_ms = crankDiff / timeDiff_ms;
                     value = (float) (cadence_ms / UnitConversions.MS_TO_S / UnitConversions.S_TO_MIN);
                 }
+                Log.e("probando", "cadence with data: " + value);
+            } else {
+                Log.e("probando", "cadence with no data: " + value);
             }
         }
 
@@ -119,6 +128,16 @@ public final class SensorDataCycling {
 
         public int getWheelRevolutionsTime() {
             return wheelRevolutionsTime;
+        }
+
+        @NonNull
+        @Override
+        protected Data getNoneValue() {
+            if (value != null) {
+                return new Data(((Data) value).distance, ((Data) value).distanceOverall, Speed.zero());
+            } else {
+                return new Data(Distance.of(0), Distance.of(0), Speed.zero());
+            }
         }
 
         public void compute(DistanceSpeed previous, Distance wheelCircumference) {
@@ -216,6 +235,12 @@ public final class SensorDataCycling {
 
         public DistanceSpeed getDistanceSpeed() {
             return this.value != null ? this.value.second : null;
+        }
+
+        @NonNull
+        @Override
+        protected Pair<Cadence, DistanceSpeed> getNoneValue() {
+            return new Pair<>(null, null);
         }
     }
 }

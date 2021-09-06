@@ -1,6 +1,7 @@
 package de.dennisguse.opentracks.viewmodels;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -108,7 +109,21 @@ public class StatisticDataBuilder {
             }
         } else if (fieldKey.equals(context.getString(R.string.stats_custom_layout_cadence_key))) {
             title = context.getString(R.string.stats_sensors_cadence);
-            if (sensorDataSet != null && sensorDataSet.getCyclingCadence() != null && sensorDataSet.getCyclingCadence().hasValue() && sensorDataSet.getCyclingCadence().isRecent()) {
+            //Log.e("probando", "-------------------------------------------------------------------------");
+            /*Log.e("probando", "cadence: sensorDataSet: " + sensorDataSet);
+            if (sensorDataSet != null) {
+                Log.e("probando", "sensorDataSet.getCyclingCadence(): " + sensorDataSet.getCyclingCadence());
+                if (sensorDataSet.getCyclingCadence() != null) {
+                    Log.e("probando", "sensorDataSet.getCyclingCadence().hasvalue(): " + sensorDataSet.getCyclingCadence().hasValue());
+                    Log.e("probando", "sensorDataSet.getCyclingCadence().isRecent(): " + sensorDataSet.getCyclingCadence().isRecent());
+                } else {
+                    Log.e("probando", "Hay datos en sensorDataSet pero getCyclingCadence() == null");
+                }
+            } else {
+                Log.e("probando", "No hay datos en sensorDataSet");
+            }*/
+
+            if (sensorDataSet != null && sensorDataSet.getCyclingCadence() != null && sensorDataSet.getCyclingCadence().hasValue()) {
                 valueAndUnit = StringUtils.getCadenceParts(context, sensorDataSet.getCyclingCadence().getValue());
                 description = sensorDataSet.getCyclingCadence().getSensorNameOrAddress();
             } else {
