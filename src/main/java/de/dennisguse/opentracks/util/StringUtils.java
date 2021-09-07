@@ -323,20 +323,20 @@ public class StringUtils {
     /**
      * @return the formatted altitude_m (or null) and it's unit as {@link Pair}
      */
-    public static Pair<String, String> getAltitudeParts(Context context, Float altitude_m, boolean metricUnits) {
+    public static Pair<String, String> getAltitudeParts(Context context, Float altitude_m, boolean metricUnits, int decimals) {
         String formattedValue = context.getString(R.string.value_unknown);
         String unit = context.getString(metricUnits ? R.string.unit_meter : R.string.unit_feet);
 
         if (altitude_m != null) {
             double value = Distance.of(altitude_m).toM_FT(metricUnits);
-            formattedValue = StringUtils.formatDecimal(value, 1);
+            formattedValue = decimals > 0 ? StringUtils.formatDecimal(value, decimals) : String.valueOf((int) value);
         }
 
         return new Pair<>(formattedValue, unit);
     }
 
-    public static String formatAltitude(Context context, Float altitude_m, boolean metricUnits) {
-        Pair<String, String> distanceParts = getAltitudeParts(context, altitude_m, metricUnits);
+    public static String formatAltitude(Context context, Float altitude_m, boolean metricUnits, int decimals) {
+        Pair<String, String> distanceParts = getAltitudeParts(context, altitude_m, metricUnits, decimals);
 
         return context.getString(R.string.altitude_with_unit, distanceParts.first, distanceParts.second);
     }

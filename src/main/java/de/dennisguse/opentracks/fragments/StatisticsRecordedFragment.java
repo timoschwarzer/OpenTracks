@@ -243,11 +243,11 @@ public class StatisticsRecordedFragment extends Fragment {
 
             Pair<String, String> parts;
 
-            parts = StringUtils.getAltitudeParts(getContext(), altitudeGain_m, preferenceMetricUnits);
+            parts = StringUtils.getAltitudeParts(getContext(), altitudeGain_m, preferenceMetricUnits, 0);
             viewBinding.statsAltitudeGainValue.setText(parts.first);
             viewBinding.statsAltitudeGainUnit.setText(parts.second);
 
-            parts = StringUtils.getAltitudeParts(getContext(), altitudeLoss_m, preferenceMetricUnits);
+            parts = StringUtils.getAltitudeParts(getContext(), altitudeLoss_m, preferenceMetricUnits, 0);
             viewBinding.statsAltitudeLossValue.setText(parts.first);
             viewBinding.statsAltitudeLossUnit.setText(parts.second);
 

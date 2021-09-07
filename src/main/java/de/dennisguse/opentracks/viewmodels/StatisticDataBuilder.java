@@ -82,12 +82,12 @@ public class StatisticDataBuilder {
             Float altitude = latestTrackPoint != null && latestTrackPoint.hasAltitude() ? (float) latestTrackPoint.getAltitude().toM() : null;
             title = context.getString(R.string.stats_altitude);
             description = latestTrackPoint != null && latestTrackPoint.hasAltitude() ? context.getString(latestTrackPoint.getAltitude().getLabelId()) : null;
-            valueAndUnit = StringUtils.getAltitudeParts(context, altitude, metricUnits);
+            valueAndUnit = StringUtils.getAltitudeParts(context, altitude, metricUnits, 1);
         } else if (fieldKey.equals(context.getString(R.string.stats_custom_layout_gain_key))) {
-            valueAndUnit = StringUtils.getAltitudeParts(context, recordingData.getTrackStatistics().getTotalAltitudeGain(), metricUnits);
+            valueAndUnit = StringUtils.getAltitudeParts(context, recordingData.getTrackStatistics().getTotalAltitudeGain(), metricUnits, 0);
             title = context.getString(R.string.stats_gain);
         } else if (fieldKey.equals(context.getString(R.string.stats_custom_layout_loss_key))) {
-            valueAndUnit = StringUtils.getAltitudeParts(context, recordingData.getTrackStatistics().getTotalAltitudeLoss(), metricUnits);
+            valueAndUnit = StringUtils.getAltitudeParts(context, recordingData.getTrackStatistics().getTotalAltitudeLoss(), metricUnits, 0);
             title = context.getString(R.string.stats_loss);
         } else if (fieldKey.equals(context.getString(R.string.stats_custom_layout_coordinates_key))) {
             title = context.getString(R.string.stats_coordinates);
